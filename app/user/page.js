@@ -1,108 +1,224 @@
-import React from 'react';
-import { User, FileText, Bell, LogOut, Share2, Edit } from 'lucide-react';
+"use client"
+import React, { useState } from 'react';
+import { User, Users, Bell, LogOut, Share2, FileText, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const Dashboard = () => {
+  const [activeView, setActiveView] = useState('profile');
+
+  const ProfileView = () => (
+    <div className="flex-1 p-8 overflow-auto">
+      {/* My Info Card */}
+      <div className="bg-[#f5f9f8] rounded-lg p-6 mb-6">
+        <div className="flex justify-between items-start">
+          <div className="flex items-center space-x-4">
+            <img src="/api/placeholder/64/64" alt="Profile" className="rounded-full" />
+            <div>
+              <h2 className="text-2xl font-semibold text-[#125b50]">Cameron Turner</h2>
+              <p className="text-gray-600">Age: 27</p>
+            </div>
+          </div>
+          <button className="px-4 py-2 bg-[#125b50] text-white rounded">
+            Review/Update Profile
+          </button>
+        </div>
+      </div>
+
+      {/* Willow's suggestions */}
+      <div className="bg-[#f5f9f8] rounded-lg p-6 mb-6">
+        <h2 className="text-2xl font-semibold text-[#125b50] mb-2">Willow's suggestions</h2>
+        <p className="text-[#125b50] mb-4">Let us help you</p>
+        <div className="space-y-4">
+          <div className="flex items-center space-x-3">
+            <div className="p-2 bg-white rounded">
+              <FileText className="text-[#125b50]" size={24} />
+            </div>
+            <span className="text-[#125b50]">Establish and communicate your medical directives</span>
+          </div>
+          <div className="flex items-center space-x-3">
+            <div className="p-2 bg-white rounded">
+              <FileText className="text-[#125b50]" size={24} />
+            </div>
+            <span className="text-[#125b50]">Establish your Power of Attorney</span>
+          </div>
+        </div>
+      </div>
+
+      {/* My Documents */}
+      <div className="bg-[#f5f9f8] rounded-lg p-6">
+        <h2 className="text-2xl font-semibold text-[#125b50] mb-6">My Documents</h2>
+        <div className="space-y-6">
+          {/* Will Document */}
+          <div className="flex items-start justify-between">
+            <div className="flex items-start space-x-4">
+              <div className="p-2 bg-white rounded">
+                <FileText className="text-[#125b50]" size={24} />
+              </div>
+              <div>
+                <h3 className="font-semibold text-[#125b50]">My will and testament</h3>
+                <p className="text-sm text-gray-600">Last Updated: Jan 2nd, 2023</p>
+              </div>
+            </div>
+            <div className="flex space-x-3">
+              <button className="px-4 py-2 bg-[#125b50] text-white rounded">Review/Update</button>
+              <button className="px-4 py-2 bg-white text-[#125b50] rounded flex items-center space-x-2">
+                <Share2 size={16} />
+                <span>Share</span>
+              </button>
+            </div>
+          </div>
+
+          {/* HIPAA Document */}
+          <div className="flex items-start justify-between">
+            <div className="flex items-start space-x-4">
+              <div className="p-2 bg-white rounded">
+                <FileText className="text-[#125b50]" size={24} />
+              </div>
+              <div>
+                <h3 className="font-semibold text-[#125b50]">HIPAA Authorization</h3>
+                <p className="text-sm text-gray-600">Last Updated: May 24th, 2022</p>
+              </div>
+            </div>
+            <div className="flex space-x-3">
+              <button className="px-4 py-2 bg-[#125b50] text-white rounded">Review/Update</button>
+              <button className="px-4 py-2 bg-white text-[#125b50] rounded flex items-center space-x-2">
+                <Share2 size={16} />
+                <span>Share</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
+  const FamilyView = () => (
+    <div className="flex-1 p-8">
+      <div className="w-full">
+        <h1 className="text-3xl font-bold mb-8">Ben Turner</h1>
+        <div className="grid grid-cols-2 gap-6">
+          {/* Checklist */}
+          <div className="bg-[#f5f9f8] rounded-lg p-6">
+            <h2 className="text-2xl font-semibold text-[#125b50] mb-6">Ben's Checklist</h2>
+            <div className="space-y-4">
+              <div className="flex items-center">
+                <div className="w-6 h-6 border-2 border-[#125b50] rounded-full flex items-center justify-center mr-3">
+                  <div className="w-4 h-4 bg-[#125b50] rounded-full"></div>
+                </div>
+                <span>Ben's Will</span>
+              </div>
+              <div className="flex items-center">
+                <div className="w-6 h-6 border-2 border-[#125b50] rounded-full flex items-center justify-center mr-3">
+                  <div className="w-4 h-4 bg-[#125b50] rounded-full"></div>
+                </div>
+                <span>Ben's Hippa Authorization</span>
+              </div>
+              <div className="flex items-center">
+                <div className="w-6 h-6 border-2 border-[#125b50] rounded-full mr-3"></div>
+                <span>Ben's Power of Attorney</span>
+              </div>
+              <div className="flex items-center">
+                <div className="w-6 h-6 border-2 border-[#125b50] rounded-full mr-3"></div>
+                <span>Ben's Medical Directives</span>
+              </div>
+              <button className="mt-4 px-4 py-2 bg-[#125b50] text-white rounded">
+                Send Reminder
+              </button>
+            </div>
+          </div>
+
+          {/* Shared Documents */}
+          <div className="bg-[#f5f9f8] rounded-lg p-6">
+            <h2 className="text-2xl font-semibold text-[#125b50] mb-6">Shared Documents</h2>
+            <div className="space-y-6">
+              <div className="space-y-2">
+                <div className="flex items-start space-x-4">
+                  <div className="p-2 bg-white rounded">
+                    <FileText className="text-[#125b50]" size={24} />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-[#125b50]">Ben's will and testament</h3>
+                    <p className="text-sm text-gray-600">Last Updated: May 7th, 2023</p>
+                  </div>
+                </div>
+                <div className="flex space-x-3">
+                  <button className="px-4 py-2 bg-[#125b50] text-white rounded">Review</button>
+                  <button className="px-4 py-2 bg-white text-[#125b50] rounded">
+                    Send Update reminder
+                  </button>
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <div className="flex items-start space-x-4">
+                  <div className="p-2 bg-white rounded">
+                    <FileText className="text-[#125b50]" size={24} />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-[#125b50]">Ben's HIPAA Authorization</h3>
+                    <p className="text-sm text-gray-600">Last Updated: May 24th, 2022</p>
+                  </div>
+                </div>
+                <div className="flex space-x-3">
+                  <button className="px-4 py-2 bg-[#125b50] text-white rounded">Review</button>
+                  <button className="px-4 py-2 bg-white text-[#125b50] rounded">
+                    Send Update reminder
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
   return (
-    <div className="flex h-screen bg-gray-100">
+    <div className="flex h-screen bg-white">
       {/* Sidebar */}
       <div className="w-64 bg-[#125b50] text-white p-6">
-        <div className="flex flex-col items-center mb-8">
-          <img
-            src="/api/placeholder/64/64"
-            alt="Profile"
-            className="w-16 h-16 rounded-full mb-4"
-          />
-          <h2 className="text-xl font-semibold">John Doe</h2>
+        <div className="flex items-center space-x-3 mb-8">
+          <img src="/api/placeholder/48/48" alt="Profile" className="rounded-full" />
+          <div>
+            <p className="text-sm">Hey</p>
+            <p className="font-semibold">Cameron</p>
+          </div>
         </div>
 
-        <nav className="space-y-4">
-          <a href="#" className="flex items-center space-x-3 p-2 rounded hover:bg-[#1a7468]">
+        <p className="text-sm mb-4">View</p>
+        <nav className="space-y-2">
+          <button
+            onClick={() => setActiveView('profile')}
+            className={`flex items-center space-x-3 w-full p-2 rounded ${
+              activeView === 'profile' ? 'bg-white/10' : 'hover:bg-white/5'
+            }`}
+          >
             <User size={20} />
-            <span>Profile</span>
-          </a>
-          <a href="#" className="flex items-center space-x-3 p-2 rounded hover:bg-[#1a7468]">
-            <FileText size={20} />
-            <span>Documents</span>
-          </a>
-          <a href="#" className="flex items-center space-x-3 p-2 rounded hover:bg-[#1a7468]">
+            <span>My profile</span>
+          </button>
+          <button
+            onClick={() => setActiveView('family')}
+            className={`flex items-center space-x-3 w-full p-2 rounded ${
+              activeView === 'family' ? 'bg-white/10' : 'hover:bg-white/5'
+            }`}
+          >
+            <Users size={20} />
+            <span>Family/Friends</span>
+          </button>
+          <button className="flex items-center space-x-3 w-full p-2 rounded hover:bg-white/5">
             <Bell size={20} />
             <span>Notifications</span>
-            <span className="bg-red-500 text-xs rounded-full px-2">2</span>
-          </a>
+            <span className="bg-red-500 text-xs rounded-full px-2 ml-auto">3</span>
+          </button>
         </nav>
 
-        <button className="flex items-center space-x-3 p-2 rounded hover:bg-[#1a7468] mt-auto absolute bottom-6">
+        <button className="flex items-center space-x-3 p-2 rounded hover:bg-white/5 mt-auto absolute bottom-6">
           <LogOut size={20} />
-          <span>Sign Out</span>
+          <span>Sign out</span>
         </button>
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 p-8 overflow-auto">
-        {/* User Info Card */}
-        <div className="bg-white rounded-lg p-6 shadow-sm mb-6">
-          <h2 className="text-2xl font-bold mb-2">John Doe</h2>
-          <p className="text-gray-600">Age: 45</p>
-        </div>
-
-        {/* Suggestions Section */}
-        <div className="bg-blue-50 rounded-lg p-6 mb-6">
-          <h3 className="text-lg font-semibold mb-4">Suggested Actions</h3>
-          <ul className="space-y-3">
-            <li className="flex items-center text-blue-700">
-              <span className="mr-2">•</span>
-              Complete your Medical Directive
-            </li>
-            <li className="flex items-center text-blue-700">
-              <span className="mr-2">•</span>
-              Set up Power of Attorney
-            </li>
-          </ul>
-        </div>
-
-        {/* Documents Section */}
-        <div className="grid md:grid-cols-2 gap-6">
-          <div className="bg-white rounded-lg p-6 shadow-sm">
-            <div className="flex justify-between items-start mb-4">
-              <div>
-                <h4 className="font-semibold">Last Will</h4>
-                <p className="text-sm text-gray-500">Updated: Jan 15, 2024</p>
-              </div>
-              <FileText className="text-gray-400" size={24} />
-            </div>
-            <div className="flex space-x-4">
-              <button className="flex items-center space-x-2 text-sm text-[#125b50]">
-                <Edit size={16} />
-                <span>Review & Update</span>
-              </button>
-              <button className="flex items-center space-x-2 text-sm text-gray-600">
-                <Share2 size={16} />
-                <span>Share</span>
-              </button>
-            </div>
-          </div>
-
-          <div className="bg-white rounded-lg p-6 shadow-sm">
-            <div className="flex justify-between items-start mb-4">
-              <div>
-                <h4 className="font-semibold">HIPAA Authorization</h4>
-                <p className="text-sm text-gray-500">Updated: Feb 1, 2024</p>
-              </div>
-              <FileText className="text-gray-400" size={24} />
-            </div>
-            <div className="flex space-x-4">
-              <button className="flex items-center space-x-2 text-sm text-[#125b50]">
-                <Edit size={16} />
-                <span>Review & Update</span>
-              </button>
-              <button className="flex items-center space-x-2 text-sm text-gray-600">
-                <Share2 size={16} />
-                <span>Share</span>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+      {activeView === 'profile' ? <ProfileView /> : <FamilyView />}
     </div>
   );
 };
